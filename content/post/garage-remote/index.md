@@ -134,7 +134,8 @@ The fuses can also control if the clock used to drive the chip is to be an exter
 In my first iteration of the firmware, I directly used the CC1101 driver implementation by Elechouse. It was a practical choice as it saved me a significant amount of time compared to reading through the CC1101 datasheet and building the driver from scratch. 
 However, there was a notable issue with this implementation: it didn't make the most efficient use of the CC1101's FIFO queue, which is designed for packet sending.
 
-The CC1101 has two 64 byte FIFO queues, one for sending data, and another one for receiving. Additionally, the CC1101 offers two configurable IO pins, and I was particularly interested in leveraging these features.
+The CC1101 has two 64 byte FIFO queues, one for sending data, and another one for receiving. Additionally, the CC1101 offers two configurable IO pins (GDO0 & GDO2), and I was particularly interested in leveraging these features.
+> You might be wondering, what about GDO1? This pin is only available when we use an alternative means of communication with the CC1101 instead of SPI, thus freeing one of the SPI pins to be used as GPIO.
 
 Elechouse's approach to sending data with the CC1101 involved filling up the FIFO with the bytes to be sent and then configuring GDO0 to indicate when the FIFO had been emptied. This signaled that the data transmission was complete, and the method returned control to the user's code.
 
@@ -150,9 +151,9 @@ Here's how the revised routine worked:
 
 2. **Initiating Transmission**: Then, I initiated the transmission process.
 
-3. **Monitoring Free Space**: At this point, I continuously monitored GPIO2 to detect whether the FIFO had more than 31 free bytes available for data.
+3. **Monitoring Free Space**: At this point, I continuously monitored GDO2 to detect whether the FIFO had more than 31 free bytes available for data.
 
-4. **Sending Additional Data**: Whenever GPIO2 indicated that there was space for an additional 31 bytes, I sent another chunk of data, and I repeated this process until the entire packet had been transmitted.
+4. **Sending Additional Data**: Whenever GDO2 indicated that there was space for an additional 31 bytes, I sent another chunk of data, and I repeated this process until the entire packet had been transmitted.
 
 This approach allowed me to send all the required data using significantly less energy. By efficiently managing the FIFO, I achieved a substantial reduction in power consumption, making my project more energy-efficient while accommodating the transmission of larger packets.
 
