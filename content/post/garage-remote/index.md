@@ -91,11 +91,11 @@ To address these challenges, I implemented a clever solution:
 
 4. **Current Limiting Resistor**: To ensure the BJT transistor's base received a safe current, I incorporated a current-limiting resistor. This is essential because BJTs cannot handle high currents on their base.
 
+5. **Protection diodes**: GND2 had a voltage approximately 0.2V lower than GND, which necessitated diodes on the BXX signals to prevent negative voltage on IO pins.
+
 **Design Challenges and Improvements:**
 
 While I am happy with my design, I did notice a few errors later on:
-
-- **Voltage Difference**: GND2 had a voltage approximately 0.2V lower than GND, which necessitated diodes on the BXX signals to prevent negative voltage on IO pins.
 
 - **Pull-Down Placement**: I initially placed pull-down resistors to GND2 behind the diodes, which didn't properly connect the IO pins to ground. For ideal operation, they should be placed after the diodes, directly to GND.
 
