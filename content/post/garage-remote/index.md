@@ -27,7 +27,7 @@ Using SDR Sharp software, I could demodulate and scrutinize the signal. In Europ
 
 ### My remotes
 Three out of four remotes I encountered operated using OOK modulation at 433.92 MHz. However, one remote, due to its age, utilized a 280 MHz carrier wave. My quest to replicate this frequency range led me to discover a discontinued chip. Legal regulations have restricted the use of this frequency band to amateurs
-> A fun, and sort of unrelated fact: Back in the day, professional telegraph operators referred to amateurs as 'ham-fisted', and this has led to frequency band where amateurs are legally allowed to operate being designated as the 'Ham-band'.
+> A fun fact: Back in the day, professional telegraph operators referred to amateurs as 'ham-fisted' due to their tendency to produce errors in their messages. This has ultimately led to the frequency bands where amateurs are legally allowed to operate being designated as the 'Ham-Bands'.
 
 Despite the challenges, I remain determined to explore the uncharted territory of the 280 MHz door. Stay tuned for updates on this intriguing pursuit.
 
@@ -39,10 +39,10 @@ However, the initial attempt with this emitter encountered a minor hiccup. The f
 ### Opening the second door
 Determined to overcome this hurdle, I decided to shift my strategy. I turned to a remarkably versatile module based on the CC1101 chip. This module provided a significantly more elaborate degree of control over the RF signals generated. Armed with this newfound capability, I meticulously aligned the signal frequency to match each of the remotes. However, despite these efforts, the doors remained frustratingly unresponsive.
 
-### Opening the third door
 Undeterred, I embarked on a quest to uncover potential mistakes in the way I interpreted the codes from the remotes. It was during this meticulous analysis that I stumbled upon a crucial revelation. A "squelch" threshold, a mechanism designed to suppress noise, had been inadvertently set. This threshold silenced the initial pulses of the signal before the software could activate the sound processing. Once I rectified this oversight, I succeeded in opening a second door. Yet, the third door continued to resist my commands.
 
-My determination to conquer the recalcitrant third door led me to a fascinating discovery. The signal from the original remote for this door exhibited peculiar characteristics. Contrary to expectations, the 'high' pulses in this signal were not a continuous stream but were instead punctuated at a constant rate. Essentially, an additional frequency was multiplexed with the 433.92 MHz signal to produce the carrier wave.
+### Opening the third door
+My determination to conquer the unforgiving third door led me to an interesting discovery. The signal from the original remote for this door exhibited peculiar characteristics. Contrary to expectations, the 'high' pulses in this signal were not a continuous stream but were instead punctuated at a constant rate. Essentially, an additional frequency was multiplexed with the 433.92 MHz signal to produce the carrier wave.
 
 To tackle this unique challenge, I transformed the signal sequences: I translated '1's into '1010101010101010' and '0's into '0000000000000000'. This intricate adjustment proved to be the key that finally unlocked the third door.
 
@@ -59,7 +59,7 @@ At the center of my design is the ATMEGA-328P microcontroller, a well-known comp
 ### MAX7060: A Hard-to-Find RF Transmitter
 The MAX7060 RF transmitter is a powerful component capable of emitting both FSK and ASK modulated signals. It can operate within a frequency range of 280MHz to 450MHz, potentially unlocking all my garage doors. However, finding this component proved to be a challenge. So, in its absence, I decided to use the more readily available CC1101 chip as a substitute.
 
-### CC1101
+### CC1101: An extremely powerful and common RF Transceiver
 This is a very common RF chip, and compared to the MAX7060:
   * It is capable to receive information
   * It can use additional modulations aside from FSK and ASK
@@ -161,6 +161,9 @@ This approach allowed me to send all the required data using significantly less 
 Since the device now uses less energy, this allowed me to opt for smaller coin cell batteries instead of larger Li-Po batteries. Coin cell batteries offer the benefit of compact size and significantly lower quiescent current, potentially enabling a battery life that spans decades. This also eliminates the need for a battery charging module, reducing the overall size of the project. They are also less likely to catch fire.
 
 Currently, I've employed two stacked batteries to generate 6V, which I can then regulate down to 3.3V using an AMS1117 LDO (Low Dropout Regulator). The LDO is slightly smaller than the step-up circuit a single 3V battery would require. This dual-battery setup also provides me with a greater margin for energy usage compared to using just one battery. However, I'm open to the possibility of transitioning to a single battery design in the future.
+
+## Conclusion
+Overall, I find that this project has brought me to a new level of understanding about what goes on in the RF realm, invisible to all of us but ever present in our daily lives. I remain determined to produce a 280MHz carrier wave, which I think will be a remarkable feat once achieved. I also look forward to finishing the shell case of the final design, so that it can be more comfortable and durable for daily use.
 
 I encourage you to explore the [GarageRemote GitHub Repository](https://github.com/Pablo-Ortiz-Lopez/GarageRemote)
 
