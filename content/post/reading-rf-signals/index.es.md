@@ -10,9 +10,9 @@ tags:
     - radiofrequencia
     - modulación
 ---
-Durante la vida cotidiana, a menudo nos encontramos con desafíos únicos que despiertan nuestra curiosidad y nos impulsan a explorar el mundo de la tecnología. Recientemente, me enfrenté a uno de estos enigmas: una creciente colección de mandos de garaje que abarrotaban mi vida, cada uno diseñado para uno o, como máximo, dos puertas de garaje. La cantidad de estos mandos se volvió inmanejable, lo que me llevó a embarcarme en una ambiciosa aventura. ¿Mi objetivo? Descifrar el funcionamiento interno de estos dispositivos y crear una solución versátil capaz de abrir hasta seis puertas de garaje distintas.
+Durante la vida cotidiana, a menudo nos encontramos con desafíos únicos que despiertan nuestra curiosidad y nos impulsan a explorar el mundo de la tecnología. Recientemente, me enfrenté a uno de estos enigmas: una creciente colección de mandos de garaje que abarrotaban mi vida, cada uno diseñado para una o, como máximo, dos puertas de garaje. La cantidad de estos mandos se volvió inmanejable, lo que me llevó a embarcarme en una ambiciosa aventura. ¿Mi objetivo? Descifrar el funcionamiento interno de estos dispositivos y crear una solución versátil capaz de abrir hasta seis puertas de garaje distintas.
 
-Esta cautivadora aventura me llevó a través de varias áreas emocionantes, que abarcan no solo las complejidades de las comunicaciones por RF (Radio Frecuencia), sino también el diseño de circuitos, la optimización de baterías y el arte de la comunicación a bajo nivel entre circuitos integrados.
+Esta cautivadora aventura me llevó a través de varias áreas, que abarcan no sólo las comunicaciones por RF (Radio Frecuencia), sino también el diseño de circuitos, la optimización de baterías y el arte de la comunicación a bajo nivel entre circuitos integrados.
 
 A lo largo de esta serie de artículos, profundizaremos en estos cinco segmentos distintos pero interconectados:
 
@@ -87,12 +87,12 @@ La siguiente imagen muestra cómo funciona la modulación ASK:
 Imagina que queremos enviar una secuencia de 8 ceros (00000000). Si lo moduláramos directamente como ASK, se traduciría en un completo silencio de radio. Como puedes imaginar, un receptor tendría dificultades para entender que este silencio significa 8 ceros sin un reloj compartido. Por eso, la modulación ASK requiere codificación, traduciendo bits de información en secuencias que facilitan la recuperación del reloj en el extremo del receptor. Por ejemplo, cada 1 podría traducirse como '110', y cada 0 como '100'.
 
 ## Mis mandos a distancia
-Utilizando los conceptos que se mostraron anteriormente, pude comenzar la ingeniería inversa de mis mandos a distancia. Para cada uno de ellos, presioné sus botones y esperé ver un pico en la vista FFT. Si hubiera visto más de un pico separado para alguno de los mandos, significaría que están utilizando la más compleja FSK. Afortunadamente, ninguno de ellos lo hizo, lo que significa que todos utilizan ASK (puedo descartar PSK o QAM porque son mandos de consumo económicos).
+Utilizando los conceptos anteriores, pude comenzar la ingeniería inversa de mis mandos a distancia. Para cada uno de ellos, presioné sus botones y esperé ver un pico en la vista FFT. Si hubiera visto más de un pico separado para alguno de los mandos, significaría que están utilizando la más compleja FSK. Afortunadamente, no ocurrió para ninguno de ellos, lo que significa que todos utilizan ASK (puedo descartar PSK o QAM porque son mandos económicos).
 
 En esta imagen, puedes ver cómo se ve un mando a distancia en SDR Sharp. Si configuramos la demodulación en 'AM', escucharemos las variaciones en la amplitud.
 ![Señal de mi mando a distancia](images/reading-rf-signals/sdr_ask.png)
 En esta otra imagen, puedes ver cómo se ve la grabación .wav en Audacity. Finalmente, se puede observar la información binaria enviada por el mando a distancia.
-![Señal de mi mando a distancia](images/reading-rf-signals/audacity.png)
+![Datos de mi mando a distancia](images/reading-rf-signals/audacity.png)
 
 Tres de los cuatro mandos que tengo utilizan una onda portadora de 433.92 MHz. Sin embargo, uno de los mandos, debido a su antigüedad, utiliza 280 MHz, una frecuencia que las regulaciones legales desde entonces han restringido a los aficionados.
 
@@ -101,4 +101,4 @@ Tres de los cuatro mandos que tengo utilizan una onda portadora de 433.92 MHz. S
 A pesar de los desafíos, sigo decidido a explorar el territorio inexplorado de la puerta de 280 MHz. Mantente atento para actualizaciones sobre esta intrigante búsqueda.
 
 ## Conclusión
-Y con eso, concluimos nuestro viaje inicial al intrigante mundo de las señales de RF y su modulación/demodulación. Estos conocimientos sientan las bases para nuestras próximas aventuras. En los próximos artículos, aprovecharemos este conocimiento para crear nuestro propio mando a distancia de garaje multi-puertas, brindando una demostración práctica de los conceptos que hemos discutido. Así que mantente atento a la próxima entrega, donde nos sumergiremos de lleno en el diseño de la primera prueba de concepto de un mando a distancia.
+Y con eso, concluimos nuestro viaje inicial al intrigante mundo de las señales de RF y su modulación/demodulación. Estos conocimientos sientan las bases para nuestras próximas aventuras. En los próximos artículos, aprovecharemos este conocimiento para crear nuestro propio mando a distancia de garaje multi-puerta, brindando una demostración práctica de los conceptos que hemos discutido. Así que mantente atento a la próxima entrega, donde nos sumergiremos de lleno en el diseño de la primera prueba de concepto.
