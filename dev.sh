@@ -1,2 +1,7 @@
 #!/bin/bash
-sudo hugo server --bind=0.0.0.0 --port=83
+docker run --rm \
+    -it \
+    -v $(pwd):/src \
+    -p 81:1313 \
+    klakegg/hugo:0.101.0 \
+    server
