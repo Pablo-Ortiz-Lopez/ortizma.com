@@ -43,11 +43,11 @@ I could finally see the FFT in SDR Sharp software, but I didnt know how to extra
 ### Why use modulation?
 When we transmit information as electromagnetic radiation, sending it as-is isn't practical for several reasons:
 
-* Not all waves propagate effectively.
-* Antenna size varies depending on the wave.
+* Not all waves propagate effectively in all mediums.
+* Optimal antenna size varies depending on the wave.
 * Often, we want to send multiple streams without interference.
 
-To optimize information transfer, we use modulation. We mix our information with carrier waves: signals ideal for traveling through various mediums like air, cables, or optical fibers. The resulting wave inherits the carrier wave's characteristics.
+To optimize information transfer, we use modulation. We mix our information with carrier waves: signals ideal for traveling with minimal interference through various mediums like air, cables, or optical fibers. The resulting wave inherits the carrier wave's characteristics.
 
 The following chart shows the different types of signal modulation, depending on the type of data to be sent, and the type of carrier wave used:
 ![Modulation types](images/reading-rf-signals/modulations.jpg)
@@ -55,7 +55,7 @@ The following chart shows the different types of signal modulation, depending on
 ### Example application of modulation
 For instance, consider transmitting audio. Directly sending the analog signal from a microphone without modulation poses challenges:
 
-* It would require an extremely large antenna or a powerful power source.
+* It would require an extremely large antenna or extremely powerful power source.
 * Multiple audio streams would interfere with each other.
 
 To overcome this, we turn to modulation.  Looking at the chart, we want an analog carrier signal, because those propagate better in the air. And we have to look into the 'analog data' category, because the signal coming from our microphone is analog. From here, we can choose AM, FM, or PM. We will choose AM because it is straightforward and suitable for understanding later how remotes work.
