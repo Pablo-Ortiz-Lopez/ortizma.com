@@ -15,12 +15,12 @@ Hello, everyone! I'm Pablo, and I'm thrilled to share my story with you.
 
 Ever since I gained the ability to reason, I've been captivated by how everything around me works. Computers, in particular, held a special fascination. The layers of complexity behind their operation seemed endless, and they offered me the opportunity to solve problems in a logical manner that would otherwise be mechanical tasks.
 
-> ![Cardboard computer I made around 2006](images/pablo-computer.jpg)
+> ![Cardboard computer I made around 2006](images/hello-world/pablo-computer.jpg)
 > *Cardboard computer I made around 2006* 
 
 My insatiable curiosity led me to explore numerous topics, often deemed too complex for a child. This led me to countless disagreements with the education system, which is centered around standardized learning and a limited set of concepts for everyone to follow.
 
-One aspect that set me apart was my ability to grasp concepts at a much faster rate than my peers. However, there was a catch—I could truly understand these concepts only after witnessing them in action. Unfortunately, the standardized education system relied heavily on repetition, which further fueled my disagreement with the status quo.
+One aspect that set me apart was my ability to grasp concepts at a much faster rate than my peers. However, there was a catch: I could truly understand these concepts only after witnessing them in action. Unfortunately, the standardized education system relied heavily on repetition, which further fueled my disagreement with the status quo.
 
 During my secondary education I started coding, more often as I started getting better at it. I explored subjects such as pentesting, creation of webpages, or algorithmic problem-solving.
 
@@ -37,4 +37,4 @@ Communication remains a challenge for me, but I firmly believe that with dedicat
 
 While it may not come naturally, I'm committed to pushing myself out of my comfort zone, learning from every interaction, and becoming a better communicator.
 
-So, let's embark on this journey together. Stay tuned for the next post, hopefully by next week!
+So, let's embark on this journey together. Stay tuned for the next post!
