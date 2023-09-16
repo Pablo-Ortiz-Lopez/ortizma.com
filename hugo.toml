@@ -2,3 +2,28 @@ baseURL = 'https://ortizma.com/'
 languageCode = 'en-us'
 title = 'Pablo Ortiz López'
 theme = 'stack'
+paginate = 5
+hasCJKLanguage = false
+
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
+
+[languages]
+[languages.en]
+contentDir = 'content'
+languageCode = 'en'
+languageDirection = 'ltr'
+languageName = 'English'
+title = 'Pablo Ortiz López'
+weight = 1
+[languages.en.params]
+subtitle = 'Personal Blog'
+[languages.es]
+contentDir = 'content'
+languageCode = 'es'
+languageDirection = 'ltr'
+languageName = 'Español'
+title = 'Pablo Ortiz López'
+weight = 1
+[languages.es.params]
+subtitle = 'Blog Personal'

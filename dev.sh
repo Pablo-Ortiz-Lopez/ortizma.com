@@ -10,7 +10,7 @@ fi
 docker run --rm \
     -it \
     -v $(pwd):/src \
-    -p 81:80 \
+    -p 81:443 \
     --name blog-server \
     hugo \
-    hugo server --bind=0.0.0.0 --port=80
+    hugo server --bind=0.0.0.0 --port=443 --baseURL https://blog.ortizma.com/
