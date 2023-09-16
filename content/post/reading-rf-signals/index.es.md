@@ -96,7 +96,7 @@ En esta otra imagen, puedes ver cómo se ve la grabación .wav en Audacity. Fina
 
 Tres de los cuatro mandos que tengo utilizan una onda portadora de 433.92 MHz. Sin embargo, uno de los mandos, debido a su antigüedad, utiliza 280 MHz, una frecuencia que las regulaciones legales desde entonces han restringido a los aficionados.
 
-> Un dato curioso: en el pasado, los operadores de telegrafía profesionales se referían a los aficionados como 'ham-fisted' (manos torpes) debido a su tendencia a cometer errores en sus mensajes. Esto finalmente ha llevado a que las bandas de frecuencia donde los aficionados tienen permiso legal para operar se denominen 'Ham-Bands' (Bandas de jamón).
+> Un dato curioso: en el pasado, los operadores de telegrafía profesionales se referían a los aficionados como 'ham-fisted' (Manos de jamón) debido a su tendencia a cometer errores en sus mensajes. Esto finalmente ha llevado a que las bandas de frecuencia donde los aficionados tienen permiso legal para operar se denominen 'Ham-Bands' (Bandas de jamón).
 
 A pesar de los desafíos, sigo decidido a explorar el territorio inexplorado de la puerta de 280 MHz. Mantente atento para actualizaciones sobre esta intrigante búsqueda.
 
