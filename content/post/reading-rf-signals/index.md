@@ -24,7 +24,7 @@ Throughout this article series, we'll delve into these five distinct yet interco
 * **Streamlining the design for maximum compactness.** *(Coming soon)*
 * **Guiding you through the process of building your very own multi-door remote.** *(Coming soon)*
 
-Together, we'll traverse this technological landscape, unraveling the mysteries of garage remote control and exploring the depths of modern electronics.
+Join me, as we unravel the mysteries of remote control technology and explore of modern electronics.
 
 ## The Journey Begins: Visualizing RF signals
 My journey began with the acquisition of a modest yet potent tool: an SDR (Software-Defined Radio) dongle. In the past, probing the depths of RF signals necessitated expensive equipment, but today, SDR dongles provide an affordable means to visualize and analyze these signals in real-time. The magic unfolds through the FFT algorithm (Fast Fourier Transform), breaking down received signals into their constituent frequencies, enabling us to decipher modulation techniques. 
