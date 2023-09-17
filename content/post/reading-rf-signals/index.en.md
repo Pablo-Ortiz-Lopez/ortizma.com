@@ -12,9 +12,9 @@ tags:
     - wireless
 ---
 
-In the whirlwind of everyday life, we often encounter unique challenges that spark our curiosity and drive us to explore the world of technology. I recently faced one such conundrum: a growing collection of garage remotes cluttering my life, each catering to one, two at most, garage doors. The sheer number of these remotes became unwieldy, prompting me to embark on an ambitious journey. My goal? To decipher the inner workings of these devices and create a versatile solution capable of opening up to six distinct garage doors. 
+During everyday life, I often encounter challenges that pique my curiosity and drive me to explore the world of technology. Recently, I faced one such challenge: a growing collection of garage door remotes. The sheer number of these remotes led me to embark on an ambitious project, to decipher the inner workings of these devices and create a versatile solution capable of opening up to six different garage doors.
 
-This captivating adventure took me through various exciting areas, encompassing not only the intricacies of RF (Radio Frequency) communications but also delving into circuit design, battery optimization, and the fine art of low-level communication between integrated circuits (ICs).
+This project has spanned several areas, encompassing not only RF (Radio Frequency) communications but also circuit design, battery optimization, and the art of low-level communication between integrated circuits.
 
 Throughout this article series, we'll delve into these five distinct yet interconnected segments:
 
@@ -24,84 +24,62 @@ Throughout this article series, we'll delve into these five distinct yet interco
 * **Streamlining the design for maximum compactness.** *(Coming soon)*
 * **Guiding you through the process of building your very own multi-door remote.** *(Coming soon)*
 
-Join me, as we unravel the mysteries of remote control technology and explore of modern electronics.
+Join me, as we explore the mysteries of remote control technology and modern electronics.
+## Demodulation of Signals
+To begin analyzing radio signals, we must first understand how they work.
 
-## The Journey Begins: Visualizing RF signals
-My journey began with the acquisition of a modest yet potent tool: an SDR (Software-Defined Radio) dongle. In the past, probing the depths of RF signals necessitated expensive equipment, but today, SDR dongles provide an affordable means to visualize and analyze these signals in real-time. The magic unfolds through the FFT algorithm (Fast Fourier Transform), breaking down received signals into their constituent frequencies, enabling us to decipher modulation techniques. 
+The laws of physics stipulate that to transmit a low-frequency wave through a non-conductive medium, such as air, both the transmitter and receiver need a larger antenna compared to transmitting and receiving a higher-frequency wave. They also stipulate that if we send two waves of the same frequency, they will be impossible to distinguish on our receiving device.
 
-To learn more about the FFT algorithm, I recommend the following two videos:
-* [The Remarkable Story Behind The Most Important Algorithm Of All Time](https://www.youtube.com/watch?v=nmgFG7PUHfo) by Veritasium, where the history and importance of this algorithm are discussed.
-* [But what is the Fourier Transform? A visual introduction.](https://www.youtube.com/watch?v=spUNpyF58BY) by 3Blue1Brown, useful to understand what is going on behind the scenes.
+As you can imagine, it's not desirable to use kilometer-long antennas in our portable devices, and we would also like multiple communication channels to be able to use the same medium simultaneously. Fortunately, the laws of physics cannot be modified, but we can use them to our advantage.
 
-The following image shows how the FFT plots signals in the frequency domain:
+To efficiently send information, what we do is "hide" our information in electromagnetic waves that have the properties we desire; this is known as modulation.
 
-![Visualization of the FFT algorithm](images/reading-rf-signals/fft.png)
-
-## Demodulating the signals
-I could finally see the FFT in SDR Sharp software, but I didnt know how to extract the information out of there, this is because the signals are modulated, and the appropiate demodulation technique has to be chosen in order to extract the information. But before we dive into demodulation, it's essential to understand what modulation is.
-
-### Why use modulation?
-When we transmit information as electromagnetic radiation, sending it as-is isn't practical for several reasons:
-
-* Not all waves propagate effectively in all mediums.
-* Optimal antenna size varies depending on the wave.
-* Often, we want to send multiple streams without interference.
-
-To optimize information transfer, we use modulation. We mix our information with carrier waves: signals ideal for traveling with minimal interference through various mediums like air, cables, or optical fibers. The resulting wave inherits the carrier wave's characteristics.
-
-The following chart shows the different types of signal modulation, depending on the type of data to be sent, and the type of carrier wave used:
-![Modulation types](images/reading-rf-signals/modulations.jpg)
-
-### Example application of modulation
-For instance, consider transmitting audio. Directly sending the analog signal from a microphone without modulation poses challenges:
-
-* It would require an extremely large antenna or extremely powerful power source.
-* Multiple audio streams would interfere with each other.
-
-To overcome this, we turn to modulation.  Looking at the chart, we want an analog carrier signal, because those propagate better in the air. And we have to look into the 'analog data' category, because the signal coming from our microphone is analog. From here, we can choose AM, FM, or PM. We will choose AM because it is straightforward and suitable for understanding later how remotes work.
-
-The following illustration shows how our experiment would look like using AM:
-![Modulation types](images/reading-rf-signals/am-transmission.gif)
-
-### Demodulating with SDR Sharp
-SDR Sharp empowers you to demodulate signals in real-time and listen to the demodulated output, provided it falls within the human hearing range. Additionally, you can export these demodulated signals as .wav files for detailed analysis using tools like Audacity.
-
-As a practical example, let's tune into a local radio station.
-#### Step 1: Navigating the RF Spectrum and choosing a station
-The first step is to search for stations within the FFT view. In my region, FM stations typically reside in the frequency range between approximately 87.5 MHz and 108 MHz. Somewhere along this span, I encountered four distinct transmissions, each representing a different radio station. To tune into one of them, I selected its specific frequency range.
-
-#### Step 2: Determining the modulation
-Once I selected the desired radio station, all I initially heard was noise, simply because the correct demodulation technique hadn't been applied. Unlike our previous experiment, where a single frequency would show in the FFT graph, these radio stations revealed a more intricate pattern of independently varying frequencies, a hallmark of FM modulation. Recognizing this, I swiftly switched to WFM demodulation, the type of FM employed by radio stations. Finally, I could enjoy the local radio station with crystal clarity.
-
-#### The Beauty of Distinct Carrier Waves:
-As you will observe, these stations broadcast their audio on distinct carrier waves, enabling them to transmit various audio streams concurrently. Thanks to modulation, I could savor soothing jazz, while simultaneously, a teenager could indulge in their preferred obnoxious reggaeton on the station "next door."
-
-{{<video  src="WFM.mp4" controls="yes" >}}
-
-By the way, I've showcased FM stations because, despite my efforts, I couldn't detect any AM stations similar to those we envisioned in our previous experiment. This limitation likely stems from the constraints of my equipment: a budget-friendly dongle.
-
-## ASK Modulation
-In Europe, consumer-grade automation predominantly communicates through ASK (Amplitude Shift Keying) modulation with a 433.92 MHz carrier wave. ASK is the same as the AM we discussed earlier, but instead of an analog signal, turn on and off the carrier wave depending on a binary value. 
+### Example of Modulation Application
+For example, imagine it's nighttime, and you want to communicate over a long distance with a friend. You have a flashlight in your hand, so you can turn it on and off, sending a series of pulses that your friend can interpret following a language you have agreed upon beforehand. Congratulations, you have just sent a message using Amplitude Shift Keying (ASK) modulation, the same one that our remotes use.
 
 The following image shows how ASK modulation works:
 ![ASK Modulation](images/reading-rf-signals/ask.png)
 
-Imagine we want to send a stream of 8 zeros (00000000). If we modulated this directly as ASK, it would translate to complete radio silence. As you can imagine, a receiver would have trouble figuring out that this silence means 8 zeros without a shared clock. This is why ASK modulation requires encoding, translating bits of information into sequences that facilitate clock recovery on the receiver's end. For example, each 1 could be translated to '110', and each 0 to '100'.
+#### Differences Between Remotes and Humans
+Humans have 6 receivers of electromagnetic waves, 3 in each of our eyes. These receptors physically filter a specific range of frequencies; for example, the receptors for the color red filter waves between 400THz and 480THz. This means that we could use a red flashlight, and your friend could detect the pulses with 2 of their 6 receptors. If the flashlight is white, the wave we emit will consist of a multitude of frequencies, activating all 6 receptors.
 
-## My remotes
-Using the concepts shown earlier, I could begin the reverse engineering of my remotes. For each of them, I clicked their buttons, and waited to see a spike in the FFT view. If I had seen more than one separate spike for any of the remotes, it would mean they're using the more complex FSK. Thankfully, none of them did, meaning they all use ASK (I can rule out PSK or QAM because these are cheap consumer-grade remotes). 
+Frequencies that make up visible light have disadvantages if we want to use them to control machines:
+* They could be annoying: Imagine having to use a beam of light every time you want to control the TV; it could be bothersome if you want to watch a movie in the dark.
+* Waves at such high frequencies can't penetrate solid materials with some thickness: Imagine if Wi-Fi only worked when you could see the router.
 
-In this image, you can see how a remote looks like in SDR sharp. If we set the demodulation to 'AM' we will listen to the variations in amplitude.
-![My remote's signal](images/reading-rf-signals/sdr_ask.png)
-In this other image, you can see how the .wav recording looks like in Audacity. At last, the binary data sent by the remote can be observed.
-![My remote's signal](images/reading-rf-signals/audacity.png)
+This is why electronic devices commonly use frequencies that our eyes cannot detect. In Europe, automation predominantly communicates through Amplitude Shift Keying (ASK) modulation with a carrier wave at 433.92 MHz.
 
+#### Designing a Language to Communicate
+Imagine we want to send a sequence of 8 zeros (00000000) to our friend. If we modulated it directly as ASK, it would translate to complete darkness. As you can imagine, a receiver would have difficulty understanding that this silence means 8 zeros if it doesn't have a reference for when we started transmitting and at what rate we are sending pulses. For this reason, to hide a binary message in a wave, we must first encode it, translating bits of information into sequences that facilitate clock recovery at the receiver's end. For example, each 1 could be translated as '110', and each 0 as '100'.
 
-Three out of the four remotes I have use a 433.92 MHz carrier wave. One remote, however, due to its age, uses 280 MHz, which legal regulations have since restricted to amateurs.
+## Visualizing RF Signals
+My project began with the acquisition of a modest yet powerful tool: a Software Defined Radio (SDR) dongle. These SDR dongles break down different frequencies through algorithms, rather than physically filtering them as our eyes or car radios do. This allows us to visualize and analyze these signals in real-time. The most essential algorithm to achieve this is the Fast Fourier Transform (FFT) algorithm, which decomposes received signals into their constituent frequencies, allowing us to see modulation techniques in real time.
 
-> A fun fact: Back in the day, professional telegraph operators referred to amateurs as 'ham-fisted' due to their tendency to produce errors in their messages. This has ultimately led to the frequency bands where amateurs are legally allowed to operate being designated as the 'Ham-Bands'.
+To learn more about the FFT algorithm, I recommend the following two videos:
+* [The Amazing History Behind the Most Important Algorithm of All Time](https://www.youtube.com/watch?v=nmgFG7PUHfo) by Veritasium, which discusses the history and importance of this algorithm.
+* [But what is the Fourier Transform? A visual introduction.](https://www.youtube.com/watch?v=spUNpyF58BY) by 3Blue1Brown, helpful for understanding what's happening in the background.
 
-Despite the challenges, I remain determined to explore the uncharted territory of the 280 MHz door. Stay tuned for updates on this intriguing pursuit.
+You don't need to watch the videos; the most important thing is to grasp the image of what the FFT transformation achieves:
+![FFT Algorithm Visualization](images/reading-rf-signals/fft.png)
+
+### Demodulation with SDR Sharp
+SDR Sharp allows you to demodulate signals in real-time and transforms the extracted information into sound pulses so you can hear it, as long as it's within the range of human hearing. Additionally, you can export these demodulated signals as .wav files for detailed analysis using tools like Audacity.
+
+## My Remote Controls
+Using the aforementioned concepts, I could begin reverse engineering my remote controls. For each of them, I pressed their buttons and waited to see a peak in the FFT view. If I had seen more than one separate peak for any of the remotes, it would mean they were using slightly more complex modulation: Frequency Shift Keying (FSK).
+
+FSK modulation would be like using a green flashlight to say we're okay and a red flashlight to say we're in trouble. Fortunately, this didn't happen for any of them, which means they all use ASK (we can rule out more complex modulations like PSK or QAM because these are economical remotes).
+
+In this image, you can see what a remote control looks like in SDR Sharp. If we set the demodulation to 'AM' mode, we'll hear variations in amplitude.
+![My Remote Control Signal](images/reading-rf-signals/sdr_ask.png)
+In this other image, you can see what the .wav recording looks like in Audacity. Finally, you can observe the information sent by the remote control.
+![My Remote Control Data](images/reading-rf-signals/audacity.png)
+
+Three out of the four remotes I have use a carrier wave at 433.92 MHz. However, one of the remotes, due to its age, uses 280 MHz, a frequency that legal regulations have since restricted to amateur use.
+
+> Fun fact: In the past, professional telegraph operators referred to amateurs as 'ham-fisted' due to their tendency to make mistakes in their messages. This eventually led to the frequency bands where amateurs are legally allowed to operate being called 'Ham-Bands.'
+
+Despite the challenges, I remain determined to explore the 280 MHz gate territory. Stay tuned for updates on this intriguing quest.
 
 ## Conclusion
-And with that, we conclude our initial journey into the intriguing realm of RF signals and their modulation/demodulation. These insights lay the foundation for our upcoming endeavors. In the forthcoming articles, we'll harness this knowledge to craft our very own multi-door garage remote, providing a practical demonstration of the concepts we've discussed. So, stay tuned for the next installment, where we dive headfirst into creating the first proof-of-concept design.
+With that, we conclude our initial journey into the intriguing world of RF signals and their modulation/demodulation. This knowledge lays the foundation for our upcoming adventures. In the next articles, we will leverage this knowledge to create our own multi-door garage remote control, providing a practical demonstration of the concepts we have discussed. So, stay tuned for the next installment, where we will delve into the design of the first proof of concept.
