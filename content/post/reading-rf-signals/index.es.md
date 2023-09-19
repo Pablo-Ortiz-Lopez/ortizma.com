@@ -12,34 +12,68 @@ tags:
 ---
 Durante la vida cotidiana, a menudo me encuentro con desafíos que despiertan mi curiosidad y me impulsan a explorar el mundo de la tecnología. Recientemente, me enfrenté a uno: una creciente colección de mandos de parking. La cantidad de estos mandos me llevó a embarcarme en un ambicioso proyecto, para descifrar el funcionamiento interno de estos dispositivos y crear un dispositivo capaz de abrir hasta seis puertas de parking distintas.
 
-Este proyecto ha abarcado varias áreas, no solo las comunicaciones por Radio, sino también el diseño de circuitos, la optimización de baterías y el arte de la comunicación a bajo nivel entre circuitos integrados.
+Este proyecto ha abarcado varias áreas, no solo las comunicaciones por radio, sino también el diseño de circuitos, la optimización de baterías y el arte de la comunicación a bajo nivel entre circuitos integrados.
 
 A lo largo de esta serie de artículos, profundizaremos en estos cinco segmentos distintos pero interconectados:
 
-* **Comprender cómo funcionan las comunicaciones por RF.** *(Este artículo)*
-* **Elaboración del diseño inicial del mando a distancia como prueba de concepto.** *(Próximamente)*
+* **Entender cómo funcionan las comunicaciones por radio.** *(Este artículo)*
+* **Diseñando mi primer mando a distancia.** *(Próximamente)*
 * **Abriendo mis puertas de garaje.** *(Próximamente)*
 * **Optimización del diseño para lograr el mínimo tamaño.** *(Próximamente)*
-* **Guiándote a través del proceso de construir tu propio mando a distancia multi-puerta.** *(Próximamente)*
+* **Guiándote para que puedas construir tu propio mando multi-puerta.** *(Próximamente)*
 
 Juntos, exploraremos los misterios de la tecnología de control remoto y la electrónica moderna.
 
-## Entendiendo las señales
+## Emitiendo señales
+### Por qué utilizar modulación
 Para comenzar a analizar las señales de radio, primero debemos entender como funcionan. 
 
-Las leyes de la física estipulan que para enviar una onda de baja frecuencia a través de un medio no conductivo, como es el aire, se necesita una antena más grande tanto en el emisor y receptor, que para enviar y recibir una onda de mayor frecuencia. También estipulan que si enviamos 2 ondas de la misma frecuencia, estas seran imposibles de distinguir en nuestro dispositivo receptor. 
+Cuando era pequeño, en la piscina de mi abuela, a veces intentábamos crear una "piscina de olas" usando tablas de surf. Para conseguir esto, empujabamos arriba y abajo una tabla de surf (A mi abuela esto no le gustaba porque la piscina perdía mucha agua). 
 
-Como podréis imaginar, no es deseable utilizar antenas kilométricas en nuestros dispositivos portátiles, y también nos gustaría que varios canales de comunicación puedan utilizar el mismo medio simultáneamente. Afortunadamente, las leyes de la física no se pueden modificar, pero si las podemos utilizar a nuestro favor.
+Seguramente, mi abuela hubiese preferido que hagamos las olas usando nuestras manos en lugar de tablas de surf, de esta manera, las olas tendrían mucha menos altura: 
 
-Para conseguir enviar información de forma eficiente, lo que hacemos es "esconder" nuestra información en ondas electromagnéticas que tengan las propiedades que deseamos, **esto se conoce como modulación.**
+`La altura de las olas se conoce como AMPLITUD.` 
 
-### Ejemplo de aplicación de modulación
-Por ejemplo, imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando modulación ASK, la misma que utilizan que nuestros mandos.
+Estas olas, además, serían más cortas: 
+
+`Cuanto más corta es una ola, más FRECUENCIA tiene.` 
+
+No hubieran sido muy divertidas para nosotros, porque no llegarían demasiado lejos, y no conseguirían llenar la piscina de olas, cosa que con la tabla de surf sí conseguíamos.
+
+La radiación electromagnética se comporta de forma muy similar: En lugar de hacer olas en el agua, estamos haciendo olas en una dimensión del universo que a día de hoy no sabemos a ciencia cierta cual es. Además, las olas en esta dimensión siempre se desplazan a la velocidad de la luz. 
+
+En vez de usar una tabla de surf, o nuestras manos, para ondular esta dimensión del universo agitamos electrones usando una antena. Igual que en la piscina, si nuestra antena es pequeña, como la de nuestro móvil o mando del parking, no podremos crear olas muy largas, es decir, no podremos emitir a **baja frecuencia** como hacía con la tabla de surf.
+
+{{<video  src="radiation.mp4" controls="no" >}}
+> Esta animación, [del excelente vídeo de 3Blue1Brown sobre la radiación electromagnética](https://www.youtube.com/watch?v=aXRTczANuIs), muestra como al agitar un electrón, se producen "olas" en el campo electromagnético.
+
+### Por qué utilizar modulación
+Imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando modulación ASK, la misma que utilizan que nuestros mandos.
 
 La siguiente imagen muestra cómo funciona la modulación ASK:
 ![Modulación ASK](images/reading-rf-signals/ask.png)
+Como ves, cada pulso de luz, son en realidad muchas olas cortas. Esto se debe a que nuestra linterna no puede crear olas tan largas como para que a tu amigo le de tiempo a darse cuenta de ellas, ni sus ojos podrían detectarlas. 
 
-#### Diferencias entre los mandos y los humanos
+`Utilizar olas cortas para enviar pulsos más largos se llama MODULACIÓN.`
+
+### Diseñando un lenguaje para comunicarnos
+Imagina que queremos informar a nuestro amigo de 4 cosas:
+* Si tenemos sueño
+* Si tenemos hambre
+* Si estamos miedo
+* Si necesitamos ayuda
+
+Si utilizamos nuestra linterna, la primera idea que podríais tener, es que podrias encenderla o apagarla durante 4 segundos. Pero enseguida os dais cuenta de que esto presenta el siguiente problema:
+
+Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante 1 segundo. Pero cómo sabrá el amigo que ese único segundo es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar unas horas concretas en las que los mensajes deben ser enviados, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. Además, no podremos enviar el mensaje cuando queramos, tendremos que esperar a que llegue la hora acordada.
+
+La siguiente idea que se os acabaría ocurriendo, sería que cada vez que queramos enviarle un mensaje podemos encender la linterna 4 veces, y dependiendo de si queremos decir que si o no, encenderemos la linterna durante un tiempo corto, o uno más largo. De esta manera podríamos enviar un mensaje en cualquier momento, y no haria falta que cada uno de vosotros tenga un reloj en hora.
+
+Nuestros mandos de parking utilizan exactamente el mismo lenguaje que acabamos de describir, como veremos más adelante.
+
+## Recibiendo señales
+
+### Tus ojos y la radio del coche funcionan igual
 Los humanos disponemos de 6 receptores de ondas electromagnéticas, 3 en cada uno de nuestros ojos. Estos receptores filtran físicamente un rango de frecuencias específico, por ejemplo, los receptores del color rojo filtran las ondas de entre 400THz y 480THz. Esto significa, que podríamos utilizar una linterna de color rojo, y él podría detectar los pulsos con 2 de sus 6 receptores. Si la linterna es de color blanco, la onda que emitiremos estará compuesta por una multitud de frecuencias, que activaremos sus 6 receptores. 
 
 Las frecuencias que componen la luz visible tienen desventajas si queremos utilizarlas para controlar máquinas:
@@ -49,10 +83,7 @@ Las frecuencias que componen la luz visible tienen desventajas si queremos utili
 Es por esto, que los dispositivos electrónicos habitualmente utilizan frecuencias que nuestros ojos no pueden detectar.
 En Europa, los automatismos se comunican predominantemente a través de la modulación ASK (Amplitude Shift Keying) con una onda portadora de 433.92 MHz.
 
-#### Diseñando un lenguaje para comunicarnos
-Imagina que queremos enviar una secuencia de 4 ceros (0000) a nuestro amigo. Si lo modulásemos directamente como ASK, se traduciría en completa oscuridad. Como puedes imaginar, un receptor tendría dificultades para entender que este silencio significa 8 ceros si no tiene una referencia de cuando hemos empezado a enviar, y con que velocidad enviamos pulsos. Por esta razón, para esconder un mensaje binario en una onda, primero debemos codificarlo, traduciendo bits de información en secuencias que facilitan la recuperación del reloj en el extremo del receptor. Por ejemplo, cada 1 podría traducirse como '110', y cada 0 como '100'.
-
-## Visualizando señales de RF
+### Como ver varios colores a la vez
 Mi proyecto comenzó con la adquisición de una herramienta modesta pero potente: un 'dongle' SDR (Radio Definida por Software). Estos dispositivos descomponen las diferentes frecuencias, en lugar de filtrarlas físicamente como hacen nuestros ojos o la radio de nuestro coche. Esto nos permite detectar la presencia de múltiples "colores" al mismo tiempo.
 
 El algoritmo más esencial para conseguir esto es el algoritmo FFT (Transformada Rápida de Fourier), que descompone las señales recibidas en sus frecuencias constituyentes, lo que nos permite ver en tiempo real las técnicas de modulación. 
@@ -67,7 +98,7 @@ No es necesario que veas los vídeos, lo más importante es que interiorices est
 
 ![Visualización del algoritmo FFT](images/reading-rf-signals/fft.png)
 
-### Demodulación con SDR Sharp
+### Escuchando colores
 SDR Sharp te permite interpretar señales en tiempo real y transforma la información a impulsos de sonido para que puedas escucharla, siempre que esté dentro del rango de audición humana. Además, puedes exportar estas señales demoduladas como archivos .wav para un análisis detallado utilizando herramientas como Audacity.
 
 ## Mis mandos a distancia
