@@ -18,6 +18,8 @@ title = 'Pablo Ortiz López'
 weight = 1
 [languages.en.params]
 subtitle = 'Personal Blog'
+[languages.en.params.sidebar]
+subtitle = "This webpage serves both as a place to document my engineering projects, as well as a way to practice the essential skill of sharing knowledge."
 [languages.es]
 contentDir = 'content'
 languageCode = 'es'
@@ -27,3 +29,5 @@ title = 'Pablo Ortiz López'
 weight = 1
 [languages.es.params]
 subtitle = 'Blog Personal'
+[languages.es.params.sidebar]
+subtitle = "Esta página sirve tanto para documentar mis proyectos de ingeniería, como para practicar la habilidad esencial de compartir el conocimiento."

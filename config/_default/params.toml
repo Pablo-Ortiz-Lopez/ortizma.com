@@ -13,7 +13,6 @@ lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
 emoji = "💾"
-subtitle = "This webpage serves both the purpose of documenting my engineering projects, as well as a way to practice a skill I wasn't born with: Sharing knowledge."
 
 [sidebar.avatar]
 enabled = true
