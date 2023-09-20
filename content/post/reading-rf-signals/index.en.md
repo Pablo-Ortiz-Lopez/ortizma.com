@@ -96,7 +96,7 @@ The chaotic signal from the white flashlight is composed of many mixed waves and
 ### Seeing Multiple Colors at Once
 Today, we have a tool known as Software-Defined Radio (SDR), which allows us to detect the presence of multiple "colors" simultaneously using mathematics.
 
-> The most essential algorithm to achieve this is the Fast Fourier Transform (FFT) algorithm, which breaks down received signals into their constituent frequencies, allowing us to see how much of each color is present in the light we are receiving. For example, if we analyze the light reflecting off an orange with FFT, we would see approximately twice as much red as green and none of the blue. Below, you can see an image summarizing how the Fourier transform works.
+> The most essential algorithm to achieve this is the Fast Fourier Transform (FFT) algorithm, which breaks down received signals into their constituent frequencies, allowing us to see how much of each color is present in the light we are receiving. For example, if we analyze the light reflecting off an orange with FFT, we would see approximately twice as much red as green and almost no blue. Below, you can see an image summarizing how the Fourier transform works.
 
 ![Visualization of the FFT Algorithm](images/reading-rf-signals/fft.png)
 
