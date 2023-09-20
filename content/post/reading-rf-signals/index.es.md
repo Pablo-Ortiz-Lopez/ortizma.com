@@ -5,7 +5,7 @@ slug: leyendo-senales-rf
 date: 2023-09-16
 image: cover.png
 categories:
-    - Mando de Parking
+    - "Mando de Parking"
 tags:
     - radio
     - frecuencia
@@ -20,11 +20,11 @@ Este proyecto ha abarcado varias áreas, no solo las comunicaciones por radio, s
 
 A lo largo de esta serie de artículos, profundizaremos en estos cinco segmentos distintos pero interconectados:
 
-* **Entender cómo funcionan las comunicaciones por radio.** *(Este artículo)*
-* **Diseñando mi primer mando a distancia.** *(Próximamente)*
+* **Conceptos básicos de las comunicaciones por radio.** *(Este artículo)*
+* **Diseño de mi primer mando a distancia.** *(Próximamente)*
 * **Abriendo mis puertas de garaje.** *(Próximamente)*
 * **Optimización del diseño para lograr el mínimo tamaño.** *(Próximamente)*
-* **Guiándote para que puedas construir tu propio mando multi-puerta.** *(Próximamente)*
+* **Guía para que puedas construir tu propio mando multi-puerta.** *(Próximamente)*
 
 Juntos, exploraremos los misterios de la tecnología de control remoto y la electrónica moderna.
 
@@ -54,7 +54,7 @@ En vez de usar una tabla de surf, o nuestras manos, para ondular esta dimensión
 > Esta animación, [del excelente vídeo de 3Blue1Brown sobre la radiación electromagnética](https://www.youtube.com/watch?v=aXRTczANuIs), muestra como al agitar un electrón, se producen ondas en el campo electromagnético.
 
 ### Por qué utilizar modulación
-Imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando modulación ASK, la misma que utilizan que nuestros mandos.
+Imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando *modulación ASK*, la misma que utilizan que nuestros mandos.
 
 `ASK significa "Amplitude Shift Keying". Esto significa que utilizamos cambios en la altura (AMPLITUD) de la onda para comunicarnos.`
 
@@ -74,8 +74,8 @@ Imagina que queremos informar a nuestro amigo de 4 cosas:
 Si utilizamos nuestra linterna, la primera idea que podríais tener, es que para cada pregunta, si queremos decir que sí, encendemos la linterna, y si queremos decir que no, la apagamos.
 
 * Tenemos que definir cuanto rato dedicamos a responder cada pregunta.
-* Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante un rato. ¿Pero cómo sabrá el amigo que ese destello es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar que los mensajes empiezan siempre cuando empieza un nuevo minuto, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. 
-* No podremos enviar el mensaje cuando queramos, tendremos que esperar a que empiece otro minuto en nuestro reloj. 
+* Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante un rato. ¿Pero cómo sabrá el amigo que ese destello es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar cuando empezaremos a enviar los mensajes, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. 
+* No podremos enviar el mensaje cuando queramos, tendremos que esperar a que lleguen las horas acordadas para enviar mensajes. 
 * Si se nos rompe la linterna, nuestro amigo pensará que todo va bien, no se dará cuenta de que no podemos enviar más mensajes.
 
 La siguiente idea que se os acabaría ocurriendo, sería que cada vez que queramos enviarle un mensaje podemos encender la linterna 4 veces:
@@ -90,7 +90,7 @@ Nuestros mandos de parking utilizan exactamente el mismo lenguaje que acabamos d
 
 ## Recibiendo señales
 
-### Tus ojos y la radio del coche funcionan igual
+### Tus ojos son antenas de radio
 Los humanos disponemos de 6 receptores de ondas electromagnéticas, 3 en cada uno de nuestros ojos. Estos receptores detectan físicamente la presencia de un color específico, es decir, ondas con una longitud concreta.
 
 Por ejemplo, los receptores del color rojo filtran las ondas con una longitud de unos 700nm, tan largas como una bacteria.
@@ -123,7 +123,7 @@ SDR Sharp te permite interpretar señales en tiempo real y transforma la informa
 ## Mis mandos a distancia
 Utilizando los conceptos anteriores, pude comenzar a investigar que hacían mis mandos a distancia. Para cada uno de ellos, presioné sus botones y esperé ver un "color" en el programa. Si hubiera visto más de un "color" separado para alguno de los mandos, significaría que están utilizando una modulación un poco mas compleja: FSK. 
 
-`FSK significa "Frequency Shift Keying". Esto quiere decir que modificamos lo largas que son las ondas para comunicarnos. (Cambiamos la frecuencia, o el color)`
+`FSK significa "Frequency Shift Keying". Esto quiere decir que modificamos lo largas que son las ondas para comunicarnos (cambiamos el color).`
 
 La modulación FSK consistiría en que utilizásemos una linterna verde para decir que sí, y una linterna roja para decir que no. Afortunadamente, esto no ocurrió para ninguno de ellos, lo que significa que todos utilizan ASK.
 
@@ -136,7 +136,7 @@ Tres de los cuatro mandos que tengo utilizan una onda de 70cm, un color que no p
 
 > Un dato curioso: en el pasado, los operadores de telegrafía profesionales se referían a los aficionados como 'ham-fisted' (Manos de jamón) debido a su tendencia a cometer errores en sus mensajes. Esto finalmente ha llevado a que las bandas de frecuencia donde los aficionados tienen permiso legal para operar se denominen 'Ham-Bands' (Bandas de jamón).
 
-A pesar de los desafíos, sigo decidido a explorar el territorio de las ondas de 1m (280MHz de frecuencia). Mantente atento para actualizaciones sobre esta intrigante búsqueda.
+Sigo decidido a explorar el territorio de las ondas de 1m (280MHz de frecuencia), la mayor dificultad esta siendo encontrar dispositivos que emitan este "color". Mantente atento para estar al día sobre esta intrigante búsqueda.
 
 ## Conclusión
 Y con eso, concluimos nuestro viaje inicial al intrigante mundo de las señales de RF y su modulación/demodulación. Estos conocimientos sientan las bases para nuestras próximas aventuras. En los próximos artículos, aprovecharemos este conocimiento para crear nuestro propio mando a distancia de garaje multi-puerta, brindando una demostración práctica de los conceptos que hemos discutido. Así que mantente atento a la próxima entrega, donde nos sumergiremos de lleno en el diseño de la primera prueba de concepto.
