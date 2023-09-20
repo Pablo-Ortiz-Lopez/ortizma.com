@@ -60,12 +60,12 @@ Como ves, cada pulso de luz, son en realidad muchas olas cortas. Esto se debe a 
 Imagina que queremos informar a nuestro amigo de 4 cosas:
 * Si tenemos sueño
 * Si tenemos hambre
-* Si estamos miedo
+* Si tenemos miedo
 * Si necesitamos ayuda
 
 Si utilizamos nuestra linterna, la primera idea que podríais tener, es que podrias encenderla o apagarla durante 4 segundos. Pero enseguida os dais cuenta de que esto presenta el siguiente problema:
 
-Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante 1 segundo. Pero cómo sabrá el amigo que ese único segundo es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar unas horas concretas en las que los mensajes deben ser enviados, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. Además, no podremos enviar el mensaje cuando queramos, tendremos que esperar a que llegue la hora acordada.
+Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante 1 segundo. ¿Pero cómo sabrá el amigo que ese único segundo es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar unas horas concretas en las que los mensajes deben ser enviados, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. Además, no podremos enviar el mensaje cuando queramos, tendremos que esperar a que llegue la hora acordada.
 
 La siguiente idea que se os acabaría ocurriendo, sería que cada vez que queramos enviarle un mensaje podemos encender la linterna 4 veces, y dependiendo de si queremos decir que si o no, encenderemos la linterna durante un tiempo corto, o uno más largo. De esta manera podríamos enviar un mensaje en cualquier momento, y no haria falta que cada uno de vosotros tenga un reloj en hora.
 
