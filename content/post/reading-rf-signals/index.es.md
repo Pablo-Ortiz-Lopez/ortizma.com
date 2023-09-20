@@ -125,7 +125,7 @@ Utilizando los conceptos anteriores, pude comenzar a investigar que hacían mis 
 
 `FSK significa "Frequency Shift Keying". Esto quiere decir que modificamos lo largas que son las ondas para comunicarnos (cambiamos el color).`
 
-La modulación FSK consistiría en que utilizásemos una linterna verde para decir que sí, y una linterna roja para decir que no. Afortunadamente, esto no ocurrió para ninguno de ellos, lo que significa que todos utilizan ASK.
+La modulación FSK consistiría en que utilizásemos una linterna verde para decir que sí, y una linterna roja para decir que no. Afortunadamente, ninguno de mis mandos hacía esto, lo que significa que todos utilizan ASK.
 
 En esta imagen, puedes ver cómo se ve un mando a distancia en SDR Sharp. Si configuramos la demodulación en modo 'AM', y seleccionamos el "color" que nos interesa, escucharemos los pulsos en la señal.
 ![Señal de mi mando a distancia](images/reading-rf-signals/sdr_ask.png)

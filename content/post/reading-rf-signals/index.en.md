@@ -47,7 +47,7 @@ Electromagnetic radiation behaves very similarly: Instead of making waves in wat
 Instead of using a surfboard or our hands to ripple this dimension of the universe, we shake electrons using an antenna. Just like in the pool, if our antenna is small, like the one in our mobile phone or garage remote, we won't be able to create very long waves, meaning we won't be able to transmit at a **low frequency**, as I did with the surfboard.
 
 {{<video  src="radiation.mp4" controls="no" >}}
-> This animation, from the excellent video by 3Blue1Brown on electromagnetic radiation, shows how shaking an electron creates waves in the electromagnetic field.
+> This animation, from [the excellent video by 3Blue1Brown on electromagnetic radiation](https://www.youtube.com/watch?v=aXRTczANuIs), shows how shaking an electron creates waves in the electromagnetic field.
 
 ### Why Use Modulation
 Imagine it's nighttime, and you want to communicate with a friend from a long distance. You have a flashlight in your hand, so you can turn it on and off and send a series of pulses that your friend can interpret following a language you've agreed upon. Congratulations, you've just sent a message using *ASK modulation*, the same our remotes use.
@@ -118,6 +118,8 @@ SDR Sharp allows you to interpret signals in real-time and transform the informa
 Using the concepts mentioned earlier, I was able to start investigating what my remote controls were doing. For each of them, I pressed their buttons and waited to see a "color" in the program. If I had seen more than one separate "color" for any of the remotes, it would have meant they were using a slightly more complex modulation: Frequency Shift Keying (FSK).
 
 `FSK stands for "Frequency Shift Keying." This means we change the length of the waves to communicate (we change the color).`
+
+FSK modulation would involve using a green flashlight to indicate "yes" and a red flashlight to indicate "no." Fortunately, none of my remote controls did this, which means they all use the simpler ASK.
 
 In this image, you can see what a remote control looks like in SDR Sharp. If we set the demodulation to 'AM' mode and select the "color" we're interested in, we can hear the pulses in the signal.
 
