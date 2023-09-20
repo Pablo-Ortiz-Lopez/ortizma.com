@@ -35,6 +35,6 @@ Driven by my desire to connect with like-minded individuals and share the knowle
 Through articles on this website, I'll provide insightful explanations and a touch of personal perspective to showcase the solutions I found to a plethora of engineering problems. 
 Communication remains a challenge for me, but I firmly believe that with dedication and persistence, I can acquire and refine this essential skill. 
 
-While it may not come naturally, I'm committed to pushing myself out of my comfort zone, learning from every interaction, and becoming a better communicator.
+While it may not come naturally, I'm committed to learning from every interaction, and becoming a better communicator.
 
-So, let's embark on this journey together. Stay tuned for the next post!
+Stay tuned for the next post!
