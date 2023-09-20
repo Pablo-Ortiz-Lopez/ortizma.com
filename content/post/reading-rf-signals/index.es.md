@@ -52,6 +52,8 @@ En vez de usar una tabla de surf, o nuestras manos, para ondular esta dimensión
 ### Por qué utilizar modulación
 Imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando modulación ASK, la misma que utilizan que nuestros mandos.
 
+`ASK significa Amplitude Shift Keying. Esto significa que utilizamos cambios en la altura (AMPLITUD) de la onda para comunicarnos.`
+
 La siguiente imagen muestra cómo funciona la modulación ASK:
 ![Modulación ASK](images/reading-rf-signals/ask.png)
 Como ves, cada pulso de luz, son en realidad muchas ondas cortas. Esto se debe a que nuestra linterna no puede crear ondas tan largas como para que a tu amigo le de tiempo a darse cuenta de una única onda.
@@ -65,25 +67,23 @@ Imagina que queremos informar a nuestro amigo de 4 cosas:
 * Si tenemos miedo
 * Si necesitamos ayuda
 
-Si utilizamos nuestra linterna, la primera idea que podríais tener, es que podrias encenderla o apagarla durante 4 segundos. Pero enseguida os dais cuenta de que esto presenta el siguiente problema:
+Si utilizamos nuestra linterna, la primera idea que podríais tener, es que, durante 20 segundos, podrías apagar o encender la linterna cada 5 segundos, dependiendo de nuestra respuesta a cada una de las 4 cosas. Pero enseguida os dais cuenta de que esto presenta los siguientes problemas:
 
-Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante 1 segundo. ¿Pero cómo sabrá el amigo que ese único segundo es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar unas horas concretas en las que los mensajes deben ser enviados, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. Además, no podremos enviar el mensaje cuando queramos, tendremos que esperar a que llegue la hora acordada.
+* Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante 5 segundos. ¿Pero cómo sabrá el amigo que ese destello es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar que los mensajes empiezan siempre cuando empieza un nuevo minuto, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. 
+* No podremos enviar el mensaje cuando queramos, tendremos que esperar a que empiece otro minuto en nuestro reloj. 
+* Si se nos rompe la linterna, nuestro amigo pensará que todo va bien, no se dará cuenta de que no podemos enviar más mensajes.
 
-La siguiente idea que se os acabaría ocurriendo, sería que cada vez que queramos enviarle un mensaje podemos encender la linterna 4 veces, y dependiendo de si queremos decir que si o no, encenderemos la linterna durante un tiempo corto, o uno más largo. De esta manera podríamos enviar un mensaje en cualquier momento, y no haria falta que cada uno de vosotros tenga un reloj en hora.
+La siguiente idea que se os acabaría ocurriendo, sería que cada vez que queramos enviarle un mensaje podemos encender la linterna 4 veces:
+* Si queremos decir que no, encenderemos la linterna durante un tiempo corto, alrededor de 1 segundo
+* Si queremos decir que sí, encenderemos la linterna durante un tiempo más largo, de alrededor de 4 segundos. 
 
+De esta manera podríamos enviar un mensaje en cualquier momento, y no haria falta que cada uno de vosotros tenga un reloj.
 Nuestros mandos de parking utilizan exactamente el mismo lenguaje que acabamos de describir, como veremos más adelante.
 
 ## Recibiendo señales
 
 ### Tus ojos y la radio del coche funcionan igual
 Los humanos disponemos de 6 receptores de ondas electromagnéticas, 3 en cada uno de nuestros ojos. Estos receptores filtran físicamente un rango de frecuencias específico, por ejemplo, los receptores del color rojo filtran las ondas de entre 400THz y 480THz. Esto significa, que podríamos utilizar una linterna de color rojo, y él podría detectar los pulsos con 2 de sus 6 receptores. Si la linterna es de color blanco, la onda que emitiremos estará compuesta por una multitud de frecuencias, que activaremos sus 6 receptores. 
-
-Las frecuencias que componen la luz visible tienen desventajas si queremos utilizarlas para controlar máquinas:
-* Podrían ser molestas: Imagina que cada vez que quieres controlar la televisión tuvieses que usar un rayo de luz, podría resultar molesto si quieres ver una película a oscuras.
-* Las ondas de tan alta frecuencia no son capaces de atravesar materiales sólidos con cierto grosor: Imagina que el WiFi solo funcionase si puedes ver el router.
-
-Es por esto, que los dispositivos electrónicos habitualmente utilizan frecuencias que nuestros ojos no pueden detectar.
-En Europa, los automatismos se comunican predominantemente a través de la modulación ASK (Amplitude Shift Keying) con una onda portadora de 433.92 MHz.
 
 ### Como ver varios colores a la vez
 Mi proyecto comenzó con la adquisición de una herramienta modesta pero potente: un 'dongle' SDR (Radio Definida por Software). Estos dispositivos descomponen las diferentes frecuencias, en lugar de filtrarlas físicamente como hacen nuestros ojos o la radio de nuestro coche. Esto nos permite detectar la presencia de múltiples "colores" al mismo tiempo.
@@ -99,6 +99,15 @@ Para aprender más sobre el algoritmo FFT, te recomiendo los siguientes dos vide
 No es necesario que veas los vídeos, lo más importante es que interiorices esta imágen de lo que consigue la transformación FFT:
 
 ![Visualización del algoritmo FFT](images/reading-rf-signals/fft.png)
+
+### ¿Por qué no vemos la luz de los mandos?
+Las frecuencias que componen la luz visible tienen desventajas si queremos utilizarlas para controlar máquinas:
+* Podrían ser molestas: Imagina que cada vez que quieres controlar la televisión tuvieses que usar un rayo de luz, podría resultar molesto si quieres ver una película a oscuras.
+* Las ondas de tan alta frecuencia (muy cortas) tienen dificultades para atravesar materiales sólidos: Imagina que el WiFi solo funcionase si puedes ver el router.
+
+Es por esto, que los dispositivos electrónicos habitualmente utilizan ondas más largas, colores que nuestros ojos no pueden detectar, ni nuestros cerebros imaginar.
+
+En Europa, los automatismos se comunican predominantemente a través de la modulación ASK con una onda portadora de 433.92 MHz. Esto significa que solo utilizan un único color, y ese color se caracteriza por tener una onda que oscila 433.920.000 veces por segundo.
 
 ### Escuchando colores
 SDR Sharp te permite interpretar señales en tiempo real y transforma la información a impulsos de sonido para que puedas escucharla, siempre que esté dentro del rango de audición humana. Además, puedes exportar estas señales demoduladas como archivos .wav para un análisis detallado utilizando herramientas como Audacity.
