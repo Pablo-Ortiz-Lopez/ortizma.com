@@ -54,9 +54,9 @@ Imagina que es de noche, y quieres comunicarte desde una gran distancia con un a
 
 La siguiente imagen muestra cómo funciona la modulación ASK:
 ![Modulación ASK](images/reading-rf-signals/ask.png)
-Como ves, cada pulso de luz, son en realidad muchas ondas cortas. Esto se debe a que nuestra linterna no puede crear ondas tan largas como para que a tu amigo le de tiempo a darse cuenta de ellas, ni sus ojos podrían detectarlas. 
+Como ves, cada pulso de luz, son en realidad muchas ondas cortas. Esto se debe a que nuestra linterna no puede crear ondas tan largas como para que a tu amigo le de tiempo a darse cuenta de una única onda.
 
-`Utilizar ondas cortas para enviar pulsos más largos se llama MODULACIÓN.`
+`Utilizar ondas cortas para enviar información más lenta se llama MODULACIÓN.`
 
 ### Diseñando un lenguaje para comunicarnos
 Imagina que queremos informar a nuestro amigo de 4 cosas:
