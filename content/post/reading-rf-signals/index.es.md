@@ -44,17 +44,19 @@ La radiación electromagnética se comporta de forma muy similar: En lugar de ha
 
 En vez de usar una tabla de surf, o nuestras manos, para ondular esta dimensión del universo agitamos electrones usando una antena. Igual que en la piscina, si nuestra antena es pequeña, como la de nuestro móvil o mando del parking, no podremos crear olas muy largas, es decir, no podremos emitir a **baja frecuencia** como hacía con la tabla de surf.
 
+`Por razones linguísticas, las "olas" que hacemos en el campo electromagnético, las llamamos ONDAS.`
+
 {{<video  src="radiation.mp4" controls="no" >}}
-> Esta animación, [del excelente vídeo de 3Blue1Brown sobre la radiación electromagnética](https://www.youtube.com/watch?v=aXRTczANuIs), muestra como al agitar un electrón, se producen "olas" en el campo electromagnético.
+> Esta animación, [del excelente vídeo de 3Blue1Brown sobre la radiación electromagnética](https://www.youtube.com/watch?v=aXRTczANuIs), muestra como al agitar un electrón, se producen ondas en el campo electromagnético.
 
 ### Por qué utilizar modulación
 Imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando modulación ASK, la misma que utilizan que nuestros mandos.
 
 La siguiente imagen muestra cómo funciona la modulación ASK:
 ![Modulación ASK](images/reading-rf-signals/ask.png)
-Como ves, cada pulso de luz, son en realidad muchas olas cortas. Esto se debe a que nuestra linterna no puede crear olas tan largas como para que a tu amigo le de tiempo a darse cuenta de ellas, ni sus ojos podrían detectarlas. 
+Como ves, cada pulso de luz, son en realidad muchas ondas cortas. Esto se debe a que nuestra linterna no puede crear ondas tan largas como para que a tu amigo le de tiempo a darse cuenta de ellas, ni sus ojos podrían detectarlas. 
 
-`Utilizar olas cortas para enviar pulsos más largos se llama MODULACIÓN.`
+`Utilizar ondas cortas para enviar pulsos más largos se llama MODULACIÓN.`
 
 ### Diseñando un lenguaje para comunicarnos
 Imagina que queremos informar a nuestro amigo de 4 cosas:
