@@ -1,14 +1,18 @@
 ---
 title: "Mando de Parking: Parte 1"
-description: "Descifrando los Secretos de la Comunicación por Radio: Cómo Aprendí a Leer Señales de Radio"
+description: "Descifrando los secretos de la comunicación por radio: Cómo aprendí a leer señales de radio, y tu puedes también."
 slug: leyendo-senales-rf
 date: 2023-09-16
 image: cover.png
 categories:
     - Mando de Parking
 tags:
-    - radiofrequencia
+    - radio
+    - frecuencia
     - modulación
+    - color
+    - luz
+    - comunicación
 ---
 Durante la vida cotidiana, a menudo me encuentro con desafíos que despiertan mi curiosidad y me impulsan a explorar el mundo de la tecnología. Recientemente, me enfrenté a uno: una creciente colección de mandos de parking. La cantidad de estos mandos me llevó a embarcarme en un ambicioso proyecto, para descifrar el funcionamiento interno de estos dispositivos y crear un dispositivo capaz de abrir hasta seis puertas de parking distintas.
 
@@ -52,7 +56,7 @@ En vez de usar una tabla de surf, o nuestras manos, para ondular esta dimensión
 ### Por qué utilizar modulación
 Imagina que es de noche, y quieres comunicarte desde una gran distancia con un amigo tuyo. Tienes una linterna en la mano, por lo que puedes apagarla y encenderla, y enviar una serie de pulsos que tu amigo puede interpretar siguiendo un lenguaje que hayáis acordado previamente. Enhorabuena, acabas de enviar un mensaje utilizando modulación ASK, la misma que utilizan que nuestros mandos.
 
-`ASK significa Amplitude Shift Keying. Esto significa que utilizamos cambios en la altura (AMPLITUD) de la onda para comunicarnos.`
+`ASK significa "Amplitude Shift Keying". Esto significa que utilizamos cambios en la altura (AMPLITUD) de la onda para comunicarnos.`
 
 La siguiente imagen muestra cómo funciona la modulación ASK:
 ![Modulación ASK](images/reading-rf-signals/ask.png)
@@ -62,43 +66,46 @@ Como ves, cada pulso de luz, son en realidad muchas ondas cortas. Esto se debe a
 
 ### Diseñando un lenguaje para comunicarnos
 Imagina que queremos informar a nuestro amigo de 4 cosas:
-* Si tenemos sueño
-* Si tenemos hambre
-* Si tenemos miedo
-* Si necesitamos ayuda
+* ¿Tenemos sueño?
+* ¿Tenemos hambre?
+* ¿Tenemos miedo?
+* ¿Necesitamos ayuda?
 
-Si utilizamos nuestra linterna, la primera idea que podríais tener, es que, durante 20 segundos, podrías apagar o encender la linterna cada 5 segundos, dependiendo de nuestra respuesta a cada una de las 4 cosas. Pero enseguida os dais cuenta de que esto presenta los siguientes problemas:
+Si utilizamos nuestra linterna, la primera idea que podríais tener, es que para cada pregunta, si queremos decir que sí, encendemos la linterna, y si queremos decir que no, la apagamos.
 
-* Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante 5 segundos. ¿Pero cómo sabrá el amigo que ese destello es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar que los mensajes empiezan siempre cuando empieza un nuevo minuto, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. 
+* Tenemos que definir cuanto rato dedicamos a responder cada pregunta.
+* Si queremos decir que solo tenemos hambre, solo encenderemos la linterna durante un rato. ¿Pero cómo sabrá el amigo que ese destello es porque tenemos hambre, y no porque necesitamos ayuda? Tendríamos que acordar que los mensajes empiezan siempre cuando empieza un nuevo minuto, es decir, tendremos que tener cada uno un reloj y tenerlo en hora. 
 * No podremos enviar el mensaje cuando queramos, tendremos que esperar a que empiece otro minuto en nuestro reloj. 
 * Si se nos rompe la linterna, nuestro amigo pensará que todo va bien, no se dará cuenta de que no podemos enviar más mensajes.
 
 La siguiente idea que se os acabaría ocurriendo, sería que cada vez que queramos enviarle un mensaje podemos encender la linterna 4 veces:
-* Si queremos decir que no, encenderemos la linterna durante un tiempo corto, alrededor de 1 segundo
-* Si queremos decir que sí, encenderemos la linterna durante un tiempo más largo, de alrededor de 4 segundos. 
+* Si queremos decir que no, encenderemos la linterna durante un rato corto, y la dejamos apagada un rato más largo.
+* Si queremos decir que sí, encenderemos la linterna durante un rato largo, y la dejamos apagada un rato más corto.
 
-De esta manera podríamos enviar un mensaje en cualquier momento, y no haria falta que cada uno de vosotros tenga un reloj.
+De esta manera solucionaríamos todos los problemas que hemos encontrado con el primer método.
 Nuestros mandos de parking utilizan exactamente el mismo lenguaje que acabamos de describir, como veremos más adelante.
+
+![Datos enviados por un mando a distancia](images/reading-rf-signals/audacity.png)
+*Imagen que veremos más adelante, y muestra el mensaje que envía un mando de parking*
 
 ## Recibiendo señales
 
 ### Tus ojos y la radio del coche funcionan igual
-Los humanos disponemos de 6 receptores de ondas electromagnéticas, 3 en cada uno de nuestros ojos. Estos receptores filtran físicamente un rango de frecuencias específico, por ejemplo, los receptores del color rojo filtran las ondas de entre 400THz y 480THz. Esto significa, que podríamos utilizar una linterna de color rojo, y él podría detectar los pulsos con 2 de sus 6 receptores. Si la linterna es de color blanco, la onda que emitiremos estará compuesta por una multitud de frecuencias, que activaremos sus 6 receptores. 
+Los humanos disponemos de 6 receptores de ondas electromagnéticas, 3 en cada uno de nuestros ojos. Estos receptores detectan físicamente la presencia de un color específico, es decir, ondas con una longitud concreta.
+
+Por ejemplo, los receptores del color rojo filtran las ondas con una longitud de unos 700nm, tan largas como una bacteria.
+Si utilizamos una linterna de color rojo, el amigo detectará los pulsos con 2 de sus 6 receptores. Una linterna de color blanco emite una señal mucho más caótica, es como si chapoteásemos en el agua.
+
+La señal caótica de la linterna blanca está compuesta por muchas ondas mezcladas, y activará sus 6 receptores, ya que entre otros, contiene todos los colores que podemos ver.
+
+> Teniendo en cuenta que vivirás unos 80 años acorde con la esperanza de vida media en Europa, vivirás 2.524.608.000 segundos. Si queremos llegar a 480.000.000.000.000 segundos, necesitaremos llenar el Camp Nou i el Santiago Bernabéu a su máxima capacidad. Las ondas del color rojo oscilan 480.000.000.000.000 veces cada segundo.
 
 ### Como ver varios colores a la vez
-Mi proyecto comenzó con la adquisición de una herramienta modesta pero potente: un 'dongle' SDR (Radio Definida por Software). Estos dispositivos descomponen las diferentes frecuencias, en lugar de filtrarlas físicamente como hacen nuestros ojos o la radio de nuestro coche. Esto nos permite detectar la presencia de múltiples "colores" al mismo tiempo.
+Hoy en día, disponemos de una herramienta conocida como SDR, esta nos permite detectar la presencia de múltiples "colores" al mismo tiempo utilizando matemáticas.
 
-El algoritmo más esencial para conseguir esto es el algoritmo FFT (Transformada Rápida de Fourier), que descompone las señales recibidas en sus frecuencias constituyentes, lo que nos permite ver en tiempo real las técnicas de modulación. 
+> El algoritmo más esencial para conseguir esto es el algoritmo FFT (Transformada Rápida de Fourier), que descompone las señales recibidas en sus frecuencias constituyentes, lo que nos permite ver que cantidad de cada color está presente en la luz que estamos recibiendo. Por ejemplo, si analizamos con FFT la luz que rebota en una naranja, veríamos aproximadamente el doble de rojo que de verde, y nada de azul. A continuación podrás ver una imagen que resume el funcionamiento de la transformación de fourier.
 
-La belleza de la transformación de fourier, en mi opinión, es que es lo más parecido que tenemos a poder ajustar nuestros ojos para poder ver rangos de colores que resultan imposibles de imaginar para nosotros.
-
-Para aprender más sobre el algoritmo FFT, te recomiendo los siguientes dos videos:
-* [La Historia Sorprendente Detrás del Algoritmo Más Importante de Todos los Tiempos](https://www.youtube.com/watch?v=nmgFG7PUHfo) de Veritasium, donde se discute la historia y la importancia de este algoritmo.
-* [Pero, ¿qué es la Transformada de Fourier? Una introducción visual.](https://www.youtube.com/watch?v=spUNpyF58BY) de 3Blue1Brown, útil para comprender lo que está sucediendo en el fondo.
-
-No es necesario que veas los vídeos, lo más importante es que interiorices esta imágen de lo que consigue la transformación FFT:
-
-![Visualización del algoritmo FFT](images/reading-rf-signals/fft.png)
+>![Visualización del algoritmo FFT](images/reading-rf-signals/fft.png)
 
 ### ¿Por qué no vemos la luz de los mandos?
 Las frecuencias que componen la luz visible tienen desventajas si queremos utilizarlas para controlar máquinas:
@@ -107,26 +114,38 @@ Las frecuencias que componen la luz visible tienen desventajas si queremos utili
 
 Es por esto, que los dispositivos electrónicos habitualmente utilizan ondas más largas, colores que nuestros ojos no pueden detectar, ni nuestros cerebros imaginar.
 
-En Europa, los automatismos se comunican predominantemente a través de la modulación ASK con una onda portadora de 433.92 MHz. Esto significa que solo utilizan un único color, y ese color se caracteriza por tener una onda que oscila 433.920.000 veces por segundo.
+En Europa, los automatismos se comunican predominantemente a través de la modulación ASK con un único color definido por una onda de 70cm de largo. 
+> Una onda de 70cm tiene una frecuencia de 433.92 MHz, esto significa que oscila 433.920.000 veces por segundo. Podrías contar hasta 433.920.000 en unos 13 años.
 
 ### Escuchando colores
 SDR Sharp te permite interpretar señales en tiempo real y transforma la información a impulsos de sonido para que puedas escucharla, siempre que esté dentro del rango de audición humana. Además, puedes exportar estas señales demoduladas como archivos .wav para un análisis detallado utilizando herramientas como Audacity.
 
 ## Mis mandos a distancia
-Utilizando los conceptos anteriores, pude comenzar a investigar que hacían mis mandos a distancia. Para cada uno de ellos, presioné sus botones y esperé ver un "color" en la vista FFT. Si hubiera visto más de un "color" separado para alguno de los mandos, significaría que están utilizando una modulación un poco mas compleja: FSK. 
+Utilizando los conceptos anteriores, pude comenzar a investigar que hacían mis mandos a distancia. Para cada uno de ellos, presioné sus botones y esperé ver un "color" en el programa. Si hubiera visto más de un "color" separado para alguno de los mandos, significaría que están utilizando una modulación un poco mas compleja: FSK. 
 
-La modulación FSK consistiría en que utilizásemos una linterna verde para decir que estamos bien, y una linterna roja para decir que estamos en apuros. Afortunadamente, esto no ocurrió para ninguno de ellos, lo que significa que todos utilizan ASK.
+`FSK significa "Frequency Shift Keying". Esto quiere decir que modificamos lo largas que son las ondas para comunicarnos. (Cambiamos la frecuencia, o el color)`
+
+La modulación FSK consistiría en que utilizásemos una linterna verde para decir que sí, y una linterna roja para decir que no. Afortunadamente, esto no ocurrió para ninguno de ellos, lo que significa que todos utilizan ASK.
 
 En esta imagen, puedes ver cómo se ve un mando a distancia en SDR Sharp. Si configuramos la demodulación en modo 'AM', y seleccionamos el "color" que nos interesa, escucharemos los pulsos en la señal.
 ![Señal de mi mando a distancia](images/reading-rf-signals/sdr_ask.png)
 En esta otra imagen, puedes ver cómo se ve la grabación .wav en Audacity. Finalmente, se puede observar la información enviada por el mando a distancia.
 ![Datos de mi mando a distancia](images/reading-rf-signals/audacity.png)
 
-Tres de los cuatro mandos que tengo utilizan una onda de 433.92 MHz, un color que no podemos ver. Sin embargo, uno de los mandos, debido a su antigüedad, utiliza 280 MHz, una frecuencia que las regulaciones legales desde entonces han restringido a los aficionados.
+Tres de los cuatro mandos que tengo utilizan una onda de 70cm, un color que no podemos ver. Sin embargo, uno de los mandos, debido a su antigüedad, utiliza ondas de 1m, un color (o frecuencia) que las regulaciones legales desde entonces han prohibido a los aficionados.
 
 > Un dato curioso: en el pasado, los operadores de telegrafía profesionales se referían a los aficionados como 'ham-fisted' (Manos de jamón) debido a su tendencia a cometer errores en sus mensajes. Esto finalmente ha llevado a que las bandas de frecuencia donde los aficionados tienen permiso legal para operar se denominen 'Ham-Bands' (Bandas de jamón).
 
-A pesar de los desafíos, sigo decidido a explorar el territorio de la puerta de 280 MHz. Mantente atento para actualizaciones sobre esta intrigante búsqueda.
+A pesar de los desafíos, sigo decidido a explorar el territorio de las ondas de 1m (280MHz de frecuencia). Mantente atento para actualizaciones sobre esta intrigante búsqueda.
 
 ## Conclusión
 Y con eso, concluimos nuestro viaje inicial al intrigante mundo de las señales de RF y su modulación/demodulación. Estos conocimientos sientan las bases para nuestras próximas aventuras. En los próximos artículos, aprovecharemos este conocimiento para crear nuestro propio mando a distancia de garaje multi-puerta, brindando una demostración práctica de los conceptos que hemos discutido. Así que mantente atento a la próxima entrega, donde nos sumergiremos de lleno en el diseño de la primera prueba de concepto.
+
+## Para profundizar
+Si quieres aprender más sobre la radiación electromagnética y la luz visible, te recomiendo estos vídeos:
+* [This demo surprised me (a lot) | Barber pole, part 1](https://www.youtube.com/watch?v=QCX62YJCmGk) de 3Blue1Brown, donde presenta un fenómeno visual que expone propiedades interesantes de la luz.
+* [The origin of light, scattering, and polarization | Barber pole, part 2](https://www.youtube.com/watch?v=aXRTczANuIs) también de 3Blue1Brown, donde empieza a explicar los conceptos detrás del fenómeno previamente visto para poder entenderlo intuitivamente.
+
+Para aprender más sobre la transformación de Fourier, te recomiendo estos vídeos:
+* [The Remarkable Story Behind The Most Important Algorithm Of All Time](https://www.youtube.com/watch?v=nmgFG7PUHfo) de Veritasium, donde se discute la historia y la importancia de este algoritmo.
+* [But what is the Fourier Transform? A visual introduction.](https://www.youtube.com/watch?v=spUNpyF58BY) de 3Blue1Brown, útil para comprender lo que está sucediendo en el fondo.
