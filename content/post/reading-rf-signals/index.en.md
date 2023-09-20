@@ -1,6 +1,6 @@
 ---
 title: "Garage Remote: Part 1"
-description: "Unlocking the Secrets of RF Communication: How I learnt to read RF signals"
+description: "Unlocking the secrets of radio communication: How I learnt to read radio signals and so can you"
 slug: reading-rf-signals
 date: 2023-09-16
 image: cover.png
@@ -24,7 +24,7 @@ Throughout this series of articles, we will delve into these five distinct yet i
 * **Optimizing the Design for Minimal Size.** *(Coming Soon)*
 * **A Guide for Building Your Own Multi-Door Remote.** *(Coming Soon)*
 
-Together, we will explore the mysteries of remote control technology and modern electronics.
+Join me, as we explore the mysteries of remote control technology and modern electronics.
 
 ## Transmitting Signals
 ### Why Use Modulation
